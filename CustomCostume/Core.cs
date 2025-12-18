@@ -2,7 +2,7 @@
 using MelonLoader;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(CustomCostume.Core), "CustomCostume", "0.1.0", "Mira", null)]
+[assembly: MelonInfo(typeof(CustomCostume.Core), "CustomCostume", "1.0.0", "Mira", null)]
 [assembly: MelonGame("TEAMHORAY", "Sephiria")]
 
 namespace CustomCostume
@@ -22,7 +22,7 @@ namespace CustomCostume
         {
             if (!File.Exists(path))
             {
-                Melon<Core>.Logger.Msg(path + " is not exist!");
+                Melon<Core>.Logger.Msg(path + " dose not exist!");
                 return null;
             }
 
