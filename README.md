@@ -21,3 +21,4 @@ Team Horay の <a href="https://store.steampowered.com/app/2436940/_/">Sephiria<
 
 ## 注意事項
 - このリポジトリおよびその貢献者は、Sephiria、Team Horay、または関連団体とは一切関係がありません 
+- `SuperDucki` は読み込まれません。
