@@ -140,7 +140,7 @@ namespace CustomCostume
             var metadataPath = Path.Combine(path, Metadata);
             if (!File.Exists(metadataPath))
             {
-                Melon<Core>.Logger.Msg("Metadata.json is not exist: " + metadataPath);
+                Melon<Core>.Logger.Msg("Metadata.json does not exist! " + metadataPath);
                 return null;
             }
             var metadata = LoadMetadata(metadataPath);
