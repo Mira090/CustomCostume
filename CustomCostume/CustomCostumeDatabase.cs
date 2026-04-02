@@ -29,6 +29,15 @@ namespace CustomCostume
                 //costumeEntity.CreateGameObject();
             }
         }
+        public static void Reload()
+        {
+            Melon<Core>.Logger.Msg("Reload Costume");
+            Destroy();
+            Initialize();
+            CostumeDatabase.Destroy();
+            CostumeDatabase.Initialize();
+            LoadAllStartingItems(CostumeDatabase.GetAll());
+        }
         public static void InitializeGameObject(PlayerAvatarCostume example)
         {
             foreach (var entity in costumeDictionary.Values)
@@ -53,6 +62,11 @@ namespace CustomCostume
 
         public static void Destroy()
         {
+            foreach(var entity in costumeDictionary.Values)
+            {
+                GameObject.Destroy(entity.costumePrefab);
+                GameObject.Destroy(entity);
+            }
             costumeDictionary = null;
             metadataDictionary = null;
         }
