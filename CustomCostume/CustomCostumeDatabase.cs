@@ -206,8 +206,6 @@ namespace CustomCostume
                 return null;
             }
             var metadata = LoadMetadata(metadataPath);
-            if (metadata.id == "SuperDucki")
-                return null;
             var entity = MetadataToEntity(metadata, path);
             if (entity != null)
                 metadataDictionary[entity.id] = metadata;
