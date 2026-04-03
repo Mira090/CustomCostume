@@ -36,7 +36,8 @@ namespace CustomCostume
             Initialize();
             CostumeDatabase.Destroy();
             CostumeDatabase.Initialize();
-            LoadAllStartingItems(CostumeDatabase.GetAll());
+            LoadAllStartingItems();
+            LoadAllStartingWeapons();
         }
         public static void InitializeGameObject(PlayerAvatarCostume example)
         {
@@ -93,15 +94,62 @@ namespace CustomCostume
         {
             return GetAll().Select(x => x.ToSkin());
         }
-        public static void LoadAllStartingItems(IEnumerable<CostumeEntity> entities)
+        public static void LoadAllStartingItems()
         {
             if (Log)
                 Melon<Core>.Logger.Msg("Loading... CustomeCostume StartingItems");
-            foreach (var entity in entities)
+            foreach (var entity in CostumeDatabase.GetAll())
             {
-                if (metadataDictionary.ContainsKey(entity.id) && metadataDictionary[entity.id].startingItems != null)
+                if (!metadataDictionary.ContainsKey(entity.id))
+                    continue;
+                var costume = metadataDictionary[entity.id];
+                if (costume.startingItems == null || costume.startingItems.Count == 0)
+                    continue;
+                var list = new List<ItemEntity>();
+                foreach (var item in costume.startingItems)
                 {
-                    entity.startingItems = metadataDictionary[entity.id].startingItems.Select(ItemDatabase.FindItemById).Where(x => x != null).ToArray();
+                    if (item is long id)
+                    {
+                        var itemEntity = ItemDatabase.FindItemById((int)id);
+                        if (itemEntity != null)
+                            list.Add(itemEntity);
+                    }
+                    else if (item is string name)
+                    {
+                        var itemEntity = Core.FindItemByName(name);
+                        if (itemEntity != null)
+                            list.Add(itemEntity);
+                    }
+                }
+                entity.startingItems = list.ToArray();
+            }
+        }
+        public static void LoadAllStartingWeapons()
+        {
+            if (Log)
+                Melon<Core>.Logger.Msg("Loading... CustomeCostume StartingWeapons");
+            foreach (var entity in CostumeDatabase.GetAll())
+            {
+                if (!metadataDictionary.ContainsKey(entity.id))
+                    continue;
+                var costume = metadataDictionary[entity.id];
+                if (costume.defaultWeapon is long id)
+                {
+                    entity.defaultWeapon = WeaponDatabase.FindWeaponById((int)id);
+                    if (entity.defaultWeapon != null)
+                    {
+                        entity.onlyCanUseDefaultWeapon = costume.onlyCanUseDefaultWeapon;
+                        continue;
+                    }
+                }
+                else if (costume.defaultWeapon is string name)
+                {
+                    entity.defaultWeapon = Core.FindWeaponByName(name);
+                    if (entity.defaultWeapon != null)
+                    {
+                        entity.onlyCanUseDefaultWeapon = costume.onlyCanUseDefaultWeapon;
+                        continue;
+                    }
                 }
             }
         }

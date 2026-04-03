@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using MelonLoader;
+using System.Reflection;
 using UnityEngine;
 
 [assembly: MelonInfo(typeof(CustomCostume.Core), "CustomCostume", "1.1.0", "Mira", null)]
@@ -76,8 +77,35 @@ namespace CustomCostume
                     return;
                 //Melon<Core>.Logger.Msg("Mod GameData Loading...");
                 //CustomCostumeDatabase.Initialize();
-                CustomCostumeDatabase.LoadAllStartingItems(CostumeDatabase.GetAll());
+                CustomCostumeDatabase.LoadAllStartingItems();
+                CustomCostumeDatabase.LoadAllStartingWeapons();
             }
+        }
+
+
+        public static Dictionary<int, ItemEntity> GetItemDictionary()
+        {
+            return typeof(ItemDatabase).GetField("itemDictionary", BindingFlags.Static | BindingFlags.NonPublic).GetValue(typeof(ItemDatabase)) as Dictionary<int, ItemEntity>;
+        }
+        public static ItemEntity FindItemByName(string name)
+        {
+            var itemDictionary = GetItemDictionary();
+            foreach (var item in itemDictionary.Values)
+            {
+                if (item.aName.ToString() == name)
+                    return item;
+            }
+            return null;
+        }
+        public static WeaponEntity FindWeaponByName(string name)
+        {
+            var weapons = WeaponDatabase.GetAll();
+            foreach (var item in weapons)
+            {
+                if (item.aName.ToString() == name)
+                    return item;
+            }
+            return null;
         }
     }
 }

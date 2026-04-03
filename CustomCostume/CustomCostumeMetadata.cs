@@ -14,7 +14,9 @@ namespace CustomCostume
         public double movementCollisionRadius { get; set; }
         public bool hasBackImage { get; set; }
         public List<string> stats { get; set; }
-        public List<int> startingItems { get; set; }
+        public List<object> startingItems { get; set; }
+        public object defaultWeapon { get; set; }
+        public bool onlyCanUseDefaultWeapon { get; set; }
         public List<AnimationDatum> animationData { get; set; }
         public class AnimationDatum
         {
