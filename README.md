@@ -17,8 +17,8 @@ Team Horay の <a href="https://store.steampowered.com/app/2436940/_/">Sephiria<
 - `Metadata.json` にはコスチュームの情報があります。 `animationData` で使用する画像ファイルの名前を指定する必要があります。
 - `costumeName` と `costumeFlavorText` はコスチュームの名前と説明文を書くことができます。翻訳を考慮する場合、ここに翻訳キーを書き、翻訳後の文章を各言語の翻訳ファイルに書き加える必要があります。
 - `stats` はコスチュームのステータス効果を指定できます。スラッシュ左側にステータスのID、右側に値を書きます。
-- `startingItems` はコスチュームの初期アイテムを指定できます。アイテムのID（数値）を書きます。
+- `startingItems` はコスチュームの初期アイテムを指定できます。アイテムのID（数値）または名前を書きます。
 
 ## 注意事項
 - このリポジトリおよびその貢献者は、Sephiria、Team Horay、または関連団体とは一切関係がありません 
-- `SuperDucki` は読み込まれません。
+- <a href="https://github.com/Mira090/CustomCostumeAddOn">CustomCostume AddOn</a> とは同時に使用しないでください。
